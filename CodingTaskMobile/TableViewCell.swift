@@ -8,16 +8,16 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var starCount: UILabel!
+    @IBOutlet weak var descriptions: UILabel!
+    
+    
+  
+    func config(with item: GitInfo){
+        name.text = item.fullName
+       starCount.text = "\(item.stargazersCount)"
+       descriptions.text = item.description
     }
 
 }

@@ -7,14 +7,37 @@
 
 import UIKit
 
+//@IBDesignable
 class RectangleBoxView: UIView {
+    
+    @IBInspectable var fillColor: UIColor = .black
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
+    private let rectLineWidth: CGFloat = 8.0
+    private let halfPointShift: CGFloat = 0.5
+    
     override func draw(_ rect: CGRect) {
-        // Drawing code
+        
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: UIRectCorner.allCorners, cornerRadii: CGSize(width: 20.0, height: 20.0))
+        path.addClip()
+        path.lineWidth = rectLineWidth
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addLine(to: CGPoint(x: bounds.width, y: 0))
+        path.addLine(to: CGPoint(x: bounds.width, y: bounds.height))
+        path.addLine(to: CGPoint(x: 0, y: bounds.height))
+        path.close()
+        UIColor.black.setStroke()
+        path.stroke()
+        
+        let apart = UIBezierPath()
+        apart.lineWidth = rectLineWidth / 2
+        apart.move(to: CGPoint(x: bounds.width / 2 + halfPointShift, y: 0))
+        apart.addLine(to: CGPoint(x: bounds.width / 2 + halfPointShift, y: bounds.height))
+        apart.stroke()
+        
     }
-    */
+   
+    
+    
+    
 
 }

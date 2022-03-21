@@ -5,4 +5,22 @@
 //  Created by Nikola Andrijasevic on 16.3.22..
 //
 
-import Foundation
+import UIKit
+
+struct Informations: Decodable{
+    var items: [GitInfo]
+}
+
+struct GitInfo : Decodable,Equatable{
+    
+    var fullName : String
+    var owner : OwnerInfo
+    var description : String?
+    var forksCount : Int
+    var stargazersCount : Int
+    
+}
+
+struct OwnerInfo : Decodable,Equatable{
+    var avatarUrl : String
+}
