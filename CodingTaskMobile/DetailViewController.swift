@@ -43,6 +43,10 @@ class DetailViewController: UIViewController,WKNavigationDelegate {
         }
         
     }
+
+}
+
+extension DetailViewController{
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         spinner.stopAnimating()
         spinner.hidesWhenStopped = true

@@ -37,7 +37,7 @@ class TableViewTests: XCTestCase {
     }
     func test_cellForRow5ShouldSetCellLabelTo5(){
         setGitArray()
-        let cell = cellForRow(in: sut.tableView, row: 1) as! TableViewCell
+        let cell = cellForRow(in: sut.tableView, row: 5) as! TableViewCell
         XCTAssertEqual(cell.starCount.text, "\(5)")
     }
     func test_didSelectItemAtRow0ShouldPresentDetailVCObjects(){

@@ -18,7 +18,7 @@ class ViewControllerTests: XCTestCase {
          sut = storyboard.instantiateViewController(
         identifier: String(describing: ViewController.self))
         session = MockURLSession()
-        
+        alertVerifier = AlertVerifier()
         sut.session = session//Inject mock
         sut.loadViewIfNeeded()
     }
@@ -58,14 +58,14 @@ class ViewControllerTests: XCTestCase {
     
     func test_AfterAsyncNetworkErrorShouldShowAlert(){
         let alertShowm = expectation(description: "alert shown")
-       
+
         alertVerifier.testCompletion = {
             alertShowm.fulfill()
         }
         session.dataTaskArgsCompletionHandler.first?(
             nil,nil,TestError(message: "Lele")
         )
-        wait(for: [alertShowm], timeout: 0.01)
+        wait(for: [alertShowm], timeout: 0.4)
         verifyErrorAlert(message: "Lele")
     }
     func test_beforeAsyncNetworkErrorShouldNotBeShown(){

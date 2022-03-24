@@ -24,6 +24,7 @@
 		C19146D627E51C5700B366C1 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19146D527E51C5700B366C1 /* MockURLSession.swift */; };
 		C1B2F1D027E6241200E5B76D /* ViewControllerPresentationSpy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B2F1CF27E6241200E5B76D /* ViewControllerPresentationSpy.xcframework */; };
 		C1B2F1D227E6242A00E5B76D /* ViewControllerPresentationSpy.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C1B2F1CF27E6241200E5B76D /* ViewControllerPresentationSpy.xcframework */; };
+		C1C5CA4827ECE74E007D36DB /* MyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C5CA4727ECE74D007D36DB /* MyError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		C19146D327E5084800B366C1 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		C19146D527E51C5700B366C1 /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
 		C1B2F1CF27E6241200E5B76D /* ViewControllerPresentationSpy.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = ViewControllerPresentationSpy.xcframework; sourceTree = "<group>"; };
+		C1C5CA4727ECE74D007D36DB /* MyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				C12B484927E209C0004EE0FD /* Assets.xcassets */,
 				C12B484B27E209C0004EE0FD /* LaunchScreen.storyboard */,
 				C12B484E27E209C0004EE0FD /* Info.plist */,
+				C1C5CA4727ECE74D007D36DB /* MyError.swift */,
 			);
 			path = CodingTaskMobile;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1C5CA4827ECE74E007D36DB /* MyError.swift in Sources */,
 				C12B485727E22244004EE0FD /* TableViewCell.swift in Sources */,
 				C12B484527E209BE004EE0FD /* ViewController.swift in Sources */,
 				C12B484127E209BE004EE0FD /* AppDelegate.swift in Sources */,
