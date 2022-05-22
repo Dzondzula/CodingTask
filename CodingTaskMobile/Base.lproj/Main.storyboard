@@ -39,7 +39,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="R3c-FU-CGR">
-                                            <rect key="frame" x="20" y="34.666666666666671" width="22" height="20.333333333333329"/>
+                                            <rect key="frame" x="20" y="34.666666666666671" width="22" height="20"/>
                                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="detailLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BZc-fm-DXh">
@@ -114,7 +114,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RsU-kJ-eWb" customClass="RectangleBoxView" customModule="CodingTaskMobile" customModuleProvider="target">
-                                <rect key="frame" x="100" y="421" width="228" height="99.666666666666629"/>
+                                <rect key="frame" x="100" y="339" width="228" height="99.666666666666686"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="100" fixedFrame="YES" text="Stars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USn-5z-Vlq">
                                         <rect key="frame" x="32" y="58" width="43" height="20"/>
@@ -147,15 +147,15 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" priority="500" constant="70" id="4ZP-hf-mc3"/>
+                                    <constraint firstAttribute="height" priority="500" constant="99.666666666666629" id="4ZP-hf-mc3"/>
                                     <constraint firstAttribute="width" secondItem="RsU-kJ-eWb" secondAttribute="height" multiplier="16:7" id="jHV-hu-8mf"/>
                                 </constraints>
                             </view>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tQf-H8-YEd">
-                                <rect key="frame" x="77" y="81" width="274" height="274"/>
+                                <rect key="frame" x="77" y="81" width="274" height="215"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="tQf-H8-YEd" secondAttribute="height" multiplier="1:1" id="aGF-DR-bDN"/>
+                                    <constraint firstAttribute="width" secondItem="tQf-H8-YEd" secondAttribute="height" multiplier="1:1" constant="59" id="aGF-DR-bDN"/>
                                 </constraints>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -163,27 +163,49 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqV-PK-pCi">
-                                <rect key="frame" x="20" y="543" width="388" height="20.333333333333371"/>
+                                <rect key="frame" x="20" y="453" width="388" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="s8j-6p-phn">
+                                <rect key="frame" x="0.0" y="481" width="428" height="411"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="r3B-mv-De9">
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r3B-mv-De9" id="hiK-AX-ZJl">
+                                            <rect key="frame" x="0.0" y="0.0" width="428" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="lUJ-Uo-LAJ" id="Kkz-US-ogD"/>
+                                    <outlet property="delegate" destination="lUJ-Uo-LAJ" id="XHU-wm-Vbz"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QoB-Lz-3EC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="QoB-Lz-3EC" firstAttribute="trailing" secondItem="tQf-H8-YEd" secondAttribute="trailing" constant="77" id="2iL-bs-WTi"/>
                             <constraint firstItem="QoB-Lz-3EC" firstAttribute="trailing" secondItem="mqV-PK-pCi" secondAttribute="trailing" constant="20" id="CaB-QM-58z"/>
+                            <constraint firstItem="s8j-6p-phn" firstAttribute="trailing" secondItem="QoB-Lz-3EC" secondAttribute="trailing" id="EnB-95-Jgt"/>
+                            <constraint firstItem="s8j-6p-phn" firstAttribute="top" secondItem="mqV-PK-pCi" secondAttribute="bottom" constant="7.6699999999999999" id="GNv-sI-Yva"/>
                             <constraint firstItem="tQf-H8-YEd" firstAttribute="top" secondItem="QoB-Lz-3EC" secondAttribute="top" constant="37" id="Nwu-yb-2A5"/>
-                            <constraint firstItem="QoB-Lz-3EC" firstAttribute="trailing" secondItem="RsU-kJ-eWb" secondAttribute="trailing" constant="100" id="ZoS-2g-tog"/>
+                            <constraint firstItem="QoB-Lz-3EC" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="RsU-kJ-eWb" secondAttribute="trailing" priority="900" constant="100" id="ZoS-2g-tog"/>
                             <constraint firstItem="RsU-kJ-eWb" firstAttribute="centerX" secondItem="QoB-Lz-3EC" secondAttribute="centerX" id="Zsq-my-dt0"/>
                             <constraint firstItem="tQf-H8-YEd" firstAttribute="centerX" secondItem="QoB-Lz-3EC" secondAttribute="centerX" id="bba-wb-NhQ"/>
-                            <constraint firstItem="RsU-kJ-eWb" firstAttribute="top" secondItem="tQf-H8-YEd" secondAttribute="bottom" priority="750" constant="66" id="edg-1l-UYX"/>
-                            <constraint firstItem="mqV-PK-pCi" firstAttribute="top" secondItem="RsU-kJ-eWb" secondAttribute="bottom" constant="22.333333333333371" id="gBk-J4-wDR"/>
+                            <constraint firstItem="RsU-kJ-eWb" firstAttribute="top" secondItem="tQf-H8-YEd" secondAttribute="bottom" priority="750" constant="43" id="edg-1l-UYX"/>
+                            <constraint firstItem="mqV-PK-pCi" firstAttribute="top" secondItem="RsU-kJ-eWb" secondAttribute="bottom" constant="14.333333333333314" id="gBk-J4-wDR"/>
                             <constraint firstItem="tQf-H8-YEd" firstAttribute="leading" secondItem="QoB-Lz-3EC" secondAttribute="leading" constant="77" id="k1h-rJ-bIa"/>
                             <constraint firstItem="mqV-PK-pCi" firstAttribute="leading" secondItem="QoB-Lz-3EC" secondAttribute="leading" constant="20" id="pX2-c2-CTq"/>
-                            <constraint firstItem="RsU-kJ-eWb" firstAttribute="leading" secondItem="QoB-Lz-3EC" secondAttribute="leading" constant="100" id="qaW-5L-rCE"/>
-                            <constraint firstItem="RsU-kJ-eWb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tQf-H8-YEd" secondAttribute="bottom" constant="66" id="yW3-ak-gWe"/>
+                            <constraint firstItem="RsU-kJ-eWb" firstAttribute="leading" relation="lessThanOrEqual" secondItem="QoB-Lz-3EC" secondAttribute="leading" priority="900" constant="100" id="qaW-5L-rCE"/>
+                            <constraint firstItem="s8j-6p-phn" firstAttribute="leading" secondItem="QoB-Lz-3EC" secondAttribute="leading" id="r5i-pq-i4F"/>
+                            <constraint firstItem="QoB-Lz-3EC" firstAttribute="bottom" secondItem="s8j-6p-phn" secondAttribute="bottom" id="tbb-V4-g36"/>
+                            <constraint firstItem="RsU-kJ-eWb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tQf-H8-YEd" secondAttribute="bottom" constant="43" id="yW3-ak-gWe"/>
                         </constraints>
                     </view>
                     <connections>
@@ -191,12 +213,13 @@
                         <outlet property="forksCountLabel" destination="5ht-qP-mFq" id="myh-fw-gYU"/>
                         <outlet property="starForkView" destination="RsU-kJ-eWb" id="Kip-y2-szt"/>
                         <outlet property="starsCountLabel" destination="baU-MO-YDs" id="fMj-rJ-ubH"/>
+                        <outlet property="tableView" destination="s8j-6p-phn" id="zDX-V0-uvx"/>
                         <outlet property="webView" destination="tQf-H8-YEd" id="5KZ-4b-Aqs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SvF-Z6-5uR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1453.125" y="53.75"/>
+            <point key="canvasLocation" x="1452.3364485981308" y="53.131749460043203"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WXx-wp-DKe">

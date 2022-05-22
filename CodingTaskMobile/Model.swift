@@ -7,9 +7,22 @@
 
 import UIKit
 
-//struct Informations: Decodable{
-//    var items: [GitInfo]
-//}
+struct Commit: Decodable,Equatable {
+    var committer: CommitterPic
+    var commit: Committer
+}
+
+struct Committer: Decodable,Equatable{
+    var author: AuthorDetail
+    var message: String
+    
+}
+struct AuthorDetail: Decodable,Equatable{
+    var name : String   
+}
+struct CommitterPic: Decodable,Equatable{
+    var avatarUrl: String
+}
 
 struct GitInfo : Decodable,Equatable{
     

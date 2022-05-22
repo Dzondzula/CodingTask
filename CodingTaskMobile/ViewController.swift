@@ -54,7 +54,8 @@ class ViewController: UITableViewController,UISearchBarDelegate {
 //            }
 //        }
 //    }
-// // MODERN CONCCURENCY - Ne koristim zbog unit testing-a❗️
+//        ❗️// MODERN CONCCURENCY - Ne koristim jer ne umem da testiram async-await❗️
+    
 //    func fetchData() async -> Result<[GitInfo],MyError>{
 //        let urlString = "https://api.github.com/search/repositories?q=created:%3E2022-03-08"
 //        let url = URL(string: urlString)!
@@ -102,7 +103,7 @@ class ViewController: UITableViewController,UISearchBarDelegate {
                         if let decoded = decoded {
                             self.git = decoded
                         self.git2 = self.git
-                       // print("Here:\(decodedResponse.items)")
+                       
                         self.tableView.reloadData()
                     }
                         if let errorMessage = errorMessage {
