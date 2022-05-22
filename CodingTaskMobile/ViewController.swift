@@ -77,13 +77,13 @@ class ViewController: UITableViewController,UISearchBarDelegate {
     //USING dataTask and closure
         
     func fetchData(){
-        let urlString = "https://api.github.com/search/repositories?q=created:%3E2022-03-08"
+        let urlString = "https://api.github.com/users/octocat/repos"
         let url = URL(string: urlString)!
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
         session.dataTask(with: url){ data,response,error in
-            var decoded : Informations?
+            var decoded : [GitInfo]?
             var errorMessage: String?
             if let error = error{
                 errorMessage = error.localizedDescription
@@ -91,7 +91,7 @@ class ViewController: UITableViewController,UISearchBarDelegate {
                 errorMessage = "Response:" + HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
             } else if let data = data {
                 do{
-                 decoded = try decoder.decode(Informations.self, from: data)
+                 decoded = try decoder.decode([GitInfo].self, from: data)
                 } catch {
                     errorMessage = error.localizedDescription
                 }
@@ -100,7 +100,7 @@ class ViewController: UITableViewController,UISearchBarDelegate {
                       [weak self] in
                         guard let self = self else {return}
                         if let decoded = decoded {
-                        self.git = decoded.items
+                            self.git = decoded
                         self.git2 = self.git
                        // print("Here:\(decodedResponse.items)")
                         self.tableView.reloadData()

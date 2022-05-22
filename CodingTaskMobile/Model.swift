@@ -7,17 +7,18 @@
 
 import UIKit
 
-struct Informations: Decodable{
-    var items: [GitInfo]
-}
+//struct Informations: Decodable{
+//    var items: [GitInfo]
+//}
 
 struct GitInfo : Decodable,Equatable{
     
     var fullName : String
     var owner : OwnerInfo
     var description : String?
-    var forksCount : Int
+    var openIssues : Int
     var stargazersCount : Int
+    
     
 }
 

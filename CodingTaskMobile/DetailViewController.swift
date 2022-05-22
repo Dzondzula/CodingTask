@@ -35,7 +35,7 @@ class DetailViewController: UIViewController,WKNavigationDelegate {
         
         navigationItem.title = detailItem.fullName
         descriptionLabel.text = "\(String(describing: detailItem.description))"
-        forksCountLabel.text = "\(detailItem.forksCount)"
+        forksCountLabel.text = "\(detailItem.openIssues)"
         starsCountLabel.text = "\(detailItem.stargazersCount)"
         
         if let pictureUrl = URL(string: "\(detailItem.owner.avatarUrl)"){
