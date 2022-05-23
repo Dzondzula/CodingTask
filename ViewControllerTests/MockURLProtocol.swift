@@ -3,7 +3,8 @@
 //  ViewControllerTests
 //
 //  Created by Nikola Andrijasevic on 23.5.22..
-//
+
+// Drugi nacin za testiranje Network request
 
 import Foundation
 

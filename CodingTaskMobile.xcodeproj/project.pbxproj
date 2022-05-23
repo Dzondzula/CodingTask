@@ -22,6 +22,7 @@
 		C15C0FC2283AC40C004C5B64 /* DetailTableViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15C0FC1283AC40C004C5B64 /* DetailTableViewTests.swift */; };
 		C15C0FC4283B6F6A004C5B64 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15C0FC3283B6F6A004C5B64 /* MockURLProtocol.swift */; };
 		C15C0FC8283B70DE004C5B64 /* DetailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15C0FC7283B70DE004C5B64 /* DetailViewControllerTests.swift */; };
+		C179102B283B990C001DA5FD /* CommitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C179102A283B990C001DA5FD /* CommitTableViewCell.swift */; };
 		C19146CD27E4E86800B366C1 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19146CC27E4E86800B366C1 /* ViewControllerTests.swift */; };
 		C19146D427E5084800B366C1 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19146D327E5084800B366C1 /* TestHelpers.swift */; };
 		C19146D627E51C5700B366C1 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19146D527E51C5700B366C1 /* MockURLSession.swift */; };
@@ -79,6 +80,7 @@
 		C15C0FC1283AC40C004C5B64 /* DetailTableViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewTests.swift; sourceTree = "<group>"; };
 		C15C0FC3283B6F6A004C5B64 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		C15C0FC7283B70DE004C5B64 /* DetailViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewControllerTests.swift; sourceTree = "<group>"; };
+		C179102A283B990C001DA5FD /* CommitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitTableViewCell.swift; sourceTree = "<group>"; };
 		C19146CA27E4E86800B366C1 /* ViewControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19146CC27E4E86800B366C1 /* ViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTests.swift; sourceTree = "<group>"; };
 		C19146D327E5084800B366C1 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				C12B485627E22244004EE0FD /* TableViewCell.swift */,
+				C179102A283B990C001DA5FD /* CommitTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				C12B485927E25DF6004EE0FD /* DetailViewController.swift in Sources */,
 				C1514AE827E35EA00090204F /* RectangleBoxView.swift in Sources */,
 				C12B484327E209BE004EE0FD /* SceneDelegate.swift in Sources */,
+				C179102B283B990C001DA5FD /* CommitTableViewCell.swift in Sources */,
 				C12B485527E2112C004EE0FD /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
