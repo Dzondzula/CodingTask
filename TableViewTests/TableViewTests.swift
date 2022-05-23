@@ -55,14 +55,19 @@ class TableViewTests: XCTestCase {
             XCTFail("Expected DetailViewController, but was \(String(describing: pushedVC))")
             return }
         nextVC.loadViewIfNeeded()//to load DetailVC ibjects
-        XCTAssertEqual(nextVC.starsCountLabel.text, "0")
+        XCTAssertEqual(nextVC.descriptionLabel.text, "Recent commits:")
         XCTAssertNotNil(nextVC.webView)
         XCTAssertNotNil(nextVC.starForkView)
+        XCTAssertNotNil(nextVC.tableView)
+        XCTAssertNotNil(nextVC.starsCountLabel)
+        XCTAssertNotNil(nextVC.forksCountLabel)
+        
+        
     }
     
     func setGitArray(){
         for number in 0..<20 {
-              let info = GitInfo(fullName: "John", owner: OwnerInfo(avatarUrl: "Url"), description: "lol", forksCount: 3, stargazersCount: number)
+            let info = GitInfo(fullName: "John", owner: OwnerInfo(avatarUrl: "Url"), description: "lol", openIssues: 3, forksCount: 3, stargazersCount: number)
             sut.git2.append(info)
           }
     }

@@ -17,16 +17,24 @@ class DetailViewController: UIViewController,WKNavigationDelegate {
     @IBOutlet weak var starsCountLabel: UILabel!
     @IBOutlet weak var starForkView: RectangleBoxView!
     @IBOutlet weak var webView: WKWebView!
+    var session : URLSession
     var spinner = UIActivityIndicatorView()
     var gitCommits : [Commit] = []
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        guard let detailItem = detailItem else {
-            return
-        }
+    init(urlSession: URLSession = URLSession.shared){
+        self.session = urlSession
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        session = URLSession.shared
+        super.init(coder: coder)
+    }
+    
+  
+    
+    fileprivate func extractedFunc(_ detailItem: GitInfo) {
         tableView.register(CommitTableCell.self, forCellReuseIdentifier: "Commit")
         
         webView.navigationDelegate = self
@@ -43,6 +51,15 @@ class DetailViewController: UIViewController,WKNavigationDelegate {
         if let pictureUrl = URL(string: "\(detailItem.owner.avatarUrl)"){
             webView.load(URLRequest(url: pictureUrl))
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        guard let detailItem = detailItem else {
+            return
+        }
+        extractedFunc(detailItem)
         
         getCommits(){ result in
             switch result{
@@ -62,7 +79,7 @@ class DetailViewController: UIViewController,WKNavigationDelegate {
     func getCommits(completion: @escaping (Result<[Commit],MyError>)-> Void){
         let resourceUrl = "https://api.github.com/repos/\(detailItem!.fullName)/commits"
         let url = URL(string: resourceUrl)!
-        URLSession.shared.dataTask(with: url){ data, _, error in
+        session.dataTask(with: url){ data, _, error in
             if let error = error {
                 completion(.failure(MyError(message: error.localizedDescription)))
             }

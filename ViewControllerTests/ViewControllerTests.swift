@@ -38,8 +38,9 @@ class ViewControllerTests: XCTestCase {
     func test_ConfirmSUTCalled_dataTaskMethodOnceWithThisRequestAsArgument(){
         //sut.fetchData()
         XCTAssertEqual(session.dataTaskCallCount, 1)
-        XCTAssertEqual(session.dataTaskArgsRequest.first, URLRequest(url: URL(string: "https://api.github.com/search/repositories?q=created:%3E2022-03-08")!),"request")
+        XCTAssertEqual(session.dataTaskArgsRequest.first, URLRequest(url: URL(string: "https://api.github.com/users/octocat/repos")!),"request")
     }
+
     func test_DataForAsyncSuccessURLSessionResponse(){
         let handleResultsCalled = expectation(description: "handleResults called")
         sut.handleResults = {_ in
@@ -49,7 +50,7 @@ class ViewControllerTests: XCTestCase {
             jsonData(),response(statusCode: 200)!,nil)//we provided mock objets(fake objects)
         waitForExpectations(timeout: 0.1)
         //print(sut.git)
-       XCTAssertEqual(sut.git, [GitInfo(fullName: "Nikola",owner: OwnerInfo(avatarUrl: "URL"), description: "junior", forksCount: 2, stargazersCount: 2)])
+        XCTAssertEqual(sut.git, [GitInfo(fullName: "Nikola",owner: OwnerInfo(avatarUrl: "URL"), description: "junior", openIssues: 22, forksCount: 2, stargazersCount: 2)])
     }
     func test_dataBeforeAsyncSuccessShouldNotBeSaved(){
         session.dataTaskArgsCompletionHandler.first?(jsonData(),response(statusCode: 200),nil)
@@ -99,8 +100,7 @@ private func response(statusCode: Int) -> HTTPURLResponse?{
 
 private func jsonData() -> Data {
         """
-{
-"items": [
+ [
 {
     "fullName": "Nikola",
     "owner" : {
@@ -108,10 +108,11 @@ private func jsonData() -> Data {
         },
     "description": "junior",
     "forksCount": 2,
-    "stargazersCount": 2
+    "stargazersCount": 2,
+    "openIssues": 22
         }
     ]
-}
+
 """.data(using: .utf8)!
     }
 
