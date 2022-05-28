@@ -10,7 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController,WKNavigationDelegate {
     var detailItem: GitInfo?
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var forksCountLabel: UILabel!
@@ -20,6 +20,8 @@ class DetailViewController: UIViewController,WKNavigationDelegate {
     var session : URLSession
     var spinner = UIActivityIndicatorView()
     var gitCommits : [Commit] = []
+    
+    var viewModel: DetailTableViewModel!
     
     
     init(urlSession: URLSession = URLSession.shared){
@@ -32,34 +34,12 @@ class DetailViewController: UIViewController,WKNavigationDelegate {
         super.init(coder: coder)
     }
     
-  
-    
-    fileprivate func extractedFunc(_ detailItem: GitInfo) {
-        tableView.register(CommitTableCell.self, forCellReuseIdentifier: "Commit")
-        
-        webView.navigationDelegate = self
-        webView.addSubview(spinner)
-        spinner.center = CGPoint(x: webView.bounds.width / 2, y: webView.bounds.height / 2)
-        spinner.startAnimating()
-        spinner.hidesWhenStopped = true
-        
-        navigationItem.title = detailItem.fullName
-        descriptionLabel.text = "Recent commits:"
-        forksCountLabel.text = "\(detailItem.openIssues)"
-        starsCountLabel.text = "\(detailItem.stargazersCount)"
-        
-        if let pictureUrl = URL(string: "\(detailItem.owner.avatarUrl)"){
-            webView.load(URLRequest(url: pictureUrl))
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        guard let detailItem = detailItem else {
-            return
-        }
-        extractedFunc(detailItem)
+        
+        setUpOutlets()
         
         getCommits(){ result in
             switch result{
@@ -77,7 +57,10 @@ class DetailViewController: UIViewController,WKNavigationDelegate {
     }
     
     func getCommits(completion: @escaping (Result<[Commit],MyError>)-> Void){
-        let resourceUrl = "https://api.github.com/repos/\(detailItem!.fullName)/commits"
+        guard let detailItem = detailItem else {
+            return
+        }
+        let resourceUrl = "https://api.github.com/repos/\(detailItem.fullName)/commits"
         let url = URL(string: resourceUrl)!
         session.dataTask(with: url){ data, _, error in
             if let error = error {
@@ -89,7 +72,7 @@ class DetailViewController: UIViewController,WKNavigationDelegate {
             }
             do {
                 let decoder = JSONDecoder()
-               decoder.keyDecodingStrategy = .convertFromSnakeCase
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let gitCommit = try decoder.decode([Commit].self, from: data)
                 let commitDetails = gitCommit
                 print(commitDetails)
@@ -97,13 +80,32 @@ class DetailViewController: UIViewController,WKNavigationDelegate {
             } catch{
                 completion(.failure(MyError(message: "Error while trying to fetch data")))
             }
-      
-
             
         }.resume()
     }
     
+    fileprivate func setUpOutlets() {
+        guard let detailItem = detailItem else {
+            return
+        }
+        tableView.register(CommitTableCell.self, forCellReuseIdentifier: "Commit")
+        
+        webView.navigationDelegate = self
+        webView.addSubview(spinner)
+        spinner.center = CGPoint(x: webView.bounds.width / 2, y: webView.bounds.height / 2)
+        spinner.startAnimating()
+        spinner.hidesWhenStopped = true
+        
+        navigationItem.title = detailItem.fullName
+        descriptionLabel.text = "Recent commits:"
+        forksCountLabel.text = "\(detailItem.openIssues)"
+        starsCountLabel.text = "\(detailItem.stargazersCount)"
+        
+        if let pictureUrl = URL(string: "\(detailItem.owner.avatarUrl)"){
+            webView.load(URLRequest(url: pictureUrl))
+        }
     }
+}
 
 extension DetailViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -111,7 +113,9 @@ extension DetailViewController:UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Commit",for: indexPath) as? CommitTableCell else {return UITableViewCell()}
-        cell.config(with: gitCommits[indexPath.row])
+        viewModel = DetailTableViewModel(committer: gitCommits)
+        let model = viewModel.viewModel(for: indexPath.row)
+        cell.config(withViewModel: model)
         
         return cell
         
@@ -124,9 +128,9 @@ extension DetailViewController{
         spinner.stopAnimating()
         spinner.hidesWhenStopped = true
     }
-
+    
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         spinner.stopAnimating()
-        print("Unable to load flag")
+        print(error.localizedDescription)
     }
 }

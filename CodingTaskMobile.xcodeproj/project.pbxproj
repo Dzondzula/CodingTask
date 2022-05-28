@@ -23,6 +23,9 @@
 		C15C0FC4283B6F6A004C5B64 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15C0FC3283B6F6A004C5B64 /* MockURLProtocol.swift */; };
 		C15C0FC8283B70DE004C5B64 /* DetailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15C0FC7283B70DE004C5B64 /* DetailViewControllerTests.swift */; };
 		C179102B283B990C001DA5FD /* CommitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C179102A283B990C001DA5FD /* CommitTableViewCell.swift */; };
+		C179102F283BC8E8001DA5FD /* VCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C179102E283BC8E8001DA5FD /* VCViewModel.swift */; };
+		C17B547F2842B1CF007FC6A6 /* DetailTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B547E2842B1CF007FC6A6 /* DetailTableViewModel.swift */; };
+		C17B54812842B20A007FC6A6 /* VCTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B54802842B20A007FC6A6 /* VCTableViewModel.swift */; };
 		C19146CD27E4E86800B366C1 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19146CC27E4E86800B366C1 /* ViewControllerTests.swift */; };
 		C19146D427E5084800B366C1 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19146D327E5084800B366C1 /* TestHelpers.swift */; };
 		C19146D627E51C5700B366C1 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19146D527E51C5700B366C1 /* MockURLSession.swift */; };
@@ -81,6 +84,9 @@
 		C15C0FC3283B6F6A004C5B64 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		C15C0FC7283B70DE004C5B64 /* DetailViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewControllerTests.swift; sourceTree = "<group>"; };
 		C179102A283B990C001DA5FD /* CommitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitTableViewCell.swift; sourceTree = "<group>"; };
+		C179102E283BC8E8001DA5FD /* VCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCViewModel.swift; sourceTree = "<group>"; };
+		C17B547E2842B1CF007FC6A6 /* DetailTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewModel.swift; sourceTree = "<group>"; };
+		C17B54802842B20A007FC6A6 /* VCTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCTableViewModel.swift; sourceTree = "<group>"; };
 		C19146CA27E4E86800B366C1 /* ViewControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19146CC27E4E86800B366C1 /* ViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTests.swift; sourceTree = "<group>"; };
 		C19146D327E5084800B366C1 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
@@ -148,6 +154,7 @@
 		C12B483F27E209BE004EE0FD /* CodingTaskMobile */ = {
 			isa = PBXGroup;
 			children = (
+				C179102D283BC3BF001DA5FD /* ViewModel */,
 				C12B484027E209BE004EE0FD /* AppDelegate.swift */,
 				C12B484227E209BE004EE0FD /* SceneDelegate.swift */,
 				C12B484427E209BE004EE0FD /* ViewController.swift */,
@@ -171,6 +178,32 @@
 				C179102A283B990C001DA5FD /* CommitTableViewCell.swift */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		C179102D283BC3BF001DA5FD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C17B547D2842B19A007FC6A6 /* VCViewModel */,
+				C17B547C2842B179007FC6A6 /* DetailVCViewModel */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C17B547C2842B179007FC6A6 /* DetailVCViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C17B547E2842B1CF007FC6A6 /* DetailTableViewModel.swift */,
+			);
+			path = DetailVCViewModel;
+			sourceTree = "<group>";
+		};
+		C17B547D2842B19A007FC6A6 /* VCViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C179102E283BC8E8001DA5FD /* VCViewModel.swift */,
+				C17B54802842B20A007FC6A6 /* VCTableViewModel.swift */,
+			);
+			path = VCViewModel;
 			sourceTree = "<group>";
 		};
 		C19146CB27E4E86800B366C1 /* ViewControllerTests */ = {
@@ -335,7 +368,10 @@
 				C12B485927E25DF6004EE0FD /* DetailViewController.swift in Sources */,
 				C1514AE827E35EA00090204F /* RectangleBoxView.swift in Sources */,
 				C12B484327E209BE004EE0FD /* SceneDelegate.swift in Sources */,
+				C17B547F2842B1CF007FC6A6 /* DetailTableViewModel.swift in Sources */,
+				C179102F283BC8E8001DA5FD /* VCViewModel.swift in Sources */,
 				C179102B283B990C001DA5FD /* CommitTableViewCell.swift in Sources */,
+				C17B54812842B20A007FC6A6 /* VCTableViewModel.swift in Sources */,
 				C12B485527E2112C004EE0FD /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

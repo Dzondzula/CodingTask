@@ -8,6 +8,7 @@
 import UIKit
 
 class CommitTableCell: UITableViewCell{
+    
     let commitMessage : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -59,10 +60,11 @@ class CommitTableCell: UITableViewCell{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func config(with item: Commit){
-        comitterName.text = item.commit.author.name
-        commitMessage.text = item.commit.message
-        commiterPicture.loadImage(url: URL(string: item.committer.avatarUrl)!)
+    
+    func config(withViewModel viewModel: DetailTableCellRepresentable){
+        comitterName.text = viewModel.name
+        commitMessage.text = viewModel.commitMessage
+        commiterPicture.loadImage(url: URL(string: viewModel.commiterPicUrl)!)
     }
 }
 

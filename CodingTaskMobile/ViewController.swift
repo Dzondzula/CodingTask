@@ -9,11 +9,11 @@ import UIKit
 
 protocol URLSessionProtocol{
     func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
-//    func data(from url: URL, delegate: URLSessionTaskDelegate?) async throws -> (Data, URLResponse)
+    //    func data(from url: URL, delegate: URLSessionTaskDelegate?) async throws -> (Data, URLResponse)
 }
 
 class ViewController: UITableViewController,UISearchBarDelegate {
-
+    
     @IBOutlet var search: UITableView!
     var git : [GitInfo] = [] {
         didSet{
@@ -24,97 +24,112 @@ class ViewController: UITableViewController,UISearchBarDelegate {
     var handleResults: ([GitInfo]) -> Void = { print($0) }
     
     
-    var isSorted = false
+    var viewModel = VCViewModel(){
+        didSet{
+            guard isViewLoaded else {return}
+            
+        }
+    }
+    var tableViewModel : RepositoryTabelViewModel!
     private var dataTask: URLSessionDataTask?
     var session: URLSessionProtocol = URLSession.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        fetchData()
-        let sort = UIBarButtonItem(title: "Sort by least stars", style: .plain, target: self, action: #selector(sorting))
+        fetchData{ result in
+            switch result{
+                
+            case .success(let result):
+                DispatchQueue.main.async {
+                    [weak self] in
+                    guard let self = self else {return}
+                    
+                    self.git = result
+                    self.git2 = self.git
+                    
+                    self.tableView.reloadData()
+                    
+                }
+            case .failure(let error):
+                let errorMessage = error.localizedDescription
+                self.showError(errorMessage)
+            }
+            
+        }
+        let sort = UIBarButtonItem(title: viewModel.sortedMost, style: .plain, target: self, action: #selector(sorting))
         sort.accessibilityIdentifier = "Sort"
         sort.isAccessibilityElement = true
         navigationItem.rightBarButtonItems = [sort]
-
-    }
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        Task{
-//            let result = await fetchData()
-//            switch result{
-//            case .success(let users):
-//                self.git = users
-//                self.git2 = git
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//            case .failure(let error):
-//                showError(error.localizedDescription )
-//            }
-//        }
-//    }
-//        ❗️// MODERN CONCCURENCY - Ne koristim jer ne umem da testiram async-await❗️
-    
-//    func fetchData() async -> Result<[GitInfo],MyError>{
-//        let urlString = "https://api.github.com/search/repositories?q=created:%3E2022-03-08"
-//        let url = URL(string: urlString)!
-//        let decoder = JSONDecoder()
-//        decoder.keyDecodingStrategy = .convertFromSnakeCase
-//
-//        do{
-//            let (data,response) = try await session.data(from: url, delegate: nil)
-//            guard let response = response as? HTTPURLResponse,response.statusCode != 200 else {
-//                return .failure(MyError(message: "Cannot make connection"))}
-//            let decoded = try decoder.decode(Informations.self, from: data)
-//            return .success(decoded.items)
-//
-//        }
-//        catch {
-//            return .failure(MyError(message: "Cannot procces data"))
-//        }
         
+    }
+    //    override func viewDidAppear(_ animated: Bool) {
+    //        super.viewDidAppear(animated)
+    //        Task{
+    //            let result = await fetchData()
+    //            switch result{
+    //            case .success(let users):
+    //                self.git = users
+    //                self.git2 = git
+    //                DispatchQueue.main.async {
+    //                    self.tableView.reloadData()
+    //                }
+    //            case .failure(let error):
+    //                showError(error.localizedDescription )
+    //            }
+    //        }
+    //    }
+    //        ❗️// MODERN CONCCURENCY - Ne koristim jer ne umem da testiram async-await❗️
+    
+    //    func fetchData() async -> Result<[GitInfo],MyError>{
+    //        let urlString = "https://api.github.com/search/repositories?q=created:%3E2022-03-08"
+    //        let url = URL(string: urlString)!
+    //        let decoder = JSONDecoder()
+    //        decoder.keyDecodingStrategy = .convertFromSnakeCase
+    //
+    //        do{
+    //            let (data,response) = try await session.data(from: url, delegate: nil)
+    //            guard let response = response as? HTTPURLResponse,response.statusCode != 200 else {
+    //                return .failure(MyError(message: "Cannot make connection"))}
+    //            let decoded = try decoder.decode(Informations.self, from: data)
+    //            return .success(decoded.items)
+    //
+    //        }
+    //        catch {
+    //            return .failure(MyError(message: "Cannot procces data"))
+    //        }
+    
     
     //USING dataTask and closure
-        
-    func fetchData(){
-        let urlString = "https://api.github.com/users/octocat/repos"
+    
+    func fetchData(completionHandler: @escaping (Result<[GitInfo],Error>)->Void){
+        let urlString = viewModel.urlRepos
         let url = URL(string: urlString)!
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-
+        
         session.dataTask(with: url){ data,response,error in
-            var decoded : [GitInfo]?
-            var errorMessage: String?
+            var decoded : [GitInfo] = []
+            
             if let error = error{
-                errorMessage = error.localizedDescription
+                completionHandler(.failure(error))
             } else if let response = response as? HTTPURLResponse,response.statusCode != 200{
-                errorMessage = "Response:" + HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
+                completionHandler(.failure(error!))
             } else if let data = data {
                 do{
-                 decoded = try decoder.decode([GitInfo].self, from: data)
+                    decoded = try decoder.decode([GitInfo].self, from: data)
+                    completionHandler(.success(decoded))
                 } catch {
-                    errorMessage = error.localizedDescription
+                    
+                    completionHandler(.failure(error))
                 }
             }
-                    DispatchQueue.main.async {
-                      [weak self] in
-                        guard let self = self else {return}
-                        if let decoded = decoded {
-                            self.git = decoded
-                        self.git2 = self.git
-                       
-                        self.tableView.reloadData()
-                    }
-                        if let errorMessage = errorMessage {
-                            self.showError(errorMessage)
-                        }
-                }
+            
         }.resume()
-          
+        
     }
-   
-
+    
+    
     private func showError(_ message: String) {
         let title = "Network problem"
         let alert = UIAlertController(
@@ -127,22 +142,24 @@ class ViewController: UITableViewController,UISearchBarDelegate {
         alert.preferredAction = okAction
         present(alert, animated: true)
     }
-
-   @objc func sorting(){
-       if isSorted == false{
-        git2.sort{ $0.stargazersCount < $1.stargazersCount}
-        tableView.reloadData()
-       navigationItem.rightBarButtonItem?.title = "Sort by most stars"
-           isSorted.toggle()
-       } else {
-           git2.sort{ $0.stargazersCount > $1.stargazersCount}
-           tableView.reloadData()
-          navigationItem.rightBarButtonItem?.title = "Sort by least stars"
-           isSorted.toggle()
-       }
+    
+    @objc func sorting(){
+        if viewModel.isSorted{
+            git2.sort{ $0.stargazersCount < $1.stargazersCount}
+            tableView.reloadData()
+            navigationItem.rightBarButtonItem?.title = viewModel.sortedMost
+            viewModel.isSorted.toggle()
+        } else {
+            git2.sort{ $0.stargazersCount > $1.stargazersCount}
+            tableView.reloadData()
+            navigationItem.rightBarButtonItem?.title = viewModel.sortedLeast
+            viewModel.isSorted.toggle()
+        }
     }
+    
+    
     deinit {
-    print(">> ViewController.deinit")
+        print(">> ViewController.deinit")
     }
 }
 
@@ -158,12 +175,16 @@ extension ViewController {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
-        cell.config(with: git2[indexPath.row])
+        tableViewModel = RepositoryTabelViewModel(repository: git2)
+        let model =  tableViewModel.viewModel(for: indexPath.row)
+        cell.config(withViewModel: model)
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        vc.detailItem = git2[indexPath.row]
+        tableViewModel = RepositoryTabelViewModel(repository: git2)
+        let repoDetail =  tableViewModel.viewModelDetail(for: indexPath.row)
+        vc.detailItem = repoDetail
         navigationController?.pushViewController(vc, animated: true)
     }
     

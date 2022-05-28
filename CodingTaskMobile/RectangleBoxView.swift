@@ -36,8 +36,5 @@ class RectangleBoxView: UIView {
         
     }
    
-    
-    
-    
 
 }
