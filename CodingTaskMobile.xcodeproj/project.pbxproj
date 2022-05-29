@@ -27,6 +27,7 @@
 		C17B547F2842B1CF007FC6A6 /* DetailTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B547E2842B1CF007FC6A6 /* DetailTableViewModel.swift */; };
 		C17B54812842B20A007FC6A6 /* VCTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B54802842B20A007FC6A6 /* VCTableViewModel.swift */; };
 		C17B54982843C58B007FC6A6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B54972843C58B007FC6A6 /* Extensions.swift */; };
+		C17B549F28440588007FC6A6 /* DetailVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B549E28440587007FC6A6 /* DetailVCViewModel.swift */; };
 		C19146CD27E4E86800B366C1 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19146CC27E4E86800B366C1 /* ViewControllerTests.swift */; };
 		C19146D427E5084800B366C1 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19146D327E5084800B366C1 /* TestHelpers.swift */; };
 		C19146D627E51C5700B366C1 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19146D527E51C5700B366C1 /* MockURLSession.swift */; };
@@ -89,6 +90,7 @@
 		C17B547E2842B1CF007FC6A6 /* DetailTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewModel.swift; sourceTree = "<group>"; };
 		C17B54802842B20A007FC6A6 /* VCTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCTableViewModel.swift; sourceTree = "<group>"; };
 		C17B54972843C58B007FC6A6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		C17B549E28440587007FC6A6 /* DetailVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVCViewModel.swift; sourceTree = "<group>"; };
 		C19146CA27E4E86800B366C1 /* ViewControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19146CC27E4E86800B366C1 /* ViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTests.swift; sourceTree = "<group>"; };
 		C19146D327E5084800B366C1 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				C17B547E2842B1CF007FC6A6 /* DetailTableViewModel.swift */,
+				C17B549E28440587007FC6A6 /* DetailVCViewModel.swift */,
 			);
 			path = DetailVCViewModel;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				C12B484127E209BE004EE0FD /* AppDelegate.swift in Sources */,
 				C12B485927E25DF6004EE0FD /* DetailViewController.swift in Sources */,
 				C1514AE827E35EA00090204F /* RectangleBoxView.swift in Sources */,
+				C17B549F28440588007FC6A6 /* DetailVCViewModel.swift in Sources */,
 				C12B484327E209BE004EE0FD /* SceneDelegate.swift in Sources */,
 				C17B547F2842B1CF007FC6A6 /* DetailTableViewModel.swift in Sources */,
 				C17B54982843C58B007FC6A6 /* Extensions.swift in Sources */,

@@ -21,7 +21,9 @@ class DetailViewController: UIViewController,WKNavigationDelegate {
     var spinner = UIActivityIndicatorView()
     var gitCommits : [Commit] = []
     
-    var viewModel: DetailTableViewModel!
+    var tableViewModel: DetailTableViewModel!
+    
+    var viewModel: DetailVCViewModel!
     
     
     init(urlSession: URLSession = URLSession.shared){
@@ -40,48 +42,37 @@ class DetailViewController: UIViewController,WKNavigationDelegate {
         view.backgroundColor = .white
         
         setUpOutlets()
-        Dispatch.background { [weak self] in
-            self?.getCommits(){ result in
-            switch result{
-                
-            case .success(let commits):
-                self?.gitCommits = commits
-                Dispatch.main {
-                    self?.tableView.reloadData()
+        Dispatch.global(qos: .userInitiated).async{ [weak self] in
+            
+            if let detailItem = self?.detailItem {
+                self?.viewModel = DetailVCViewModel(name: detailItem.fullName)
+                self?.viewModel.getCommits{ result in
+                    switch result{
+                        
+                    case .success(let commits):
+                        self?.gitCommits = commits
+                        Dispatch.main.async {
+                            self?.tableView.reloadData()
+                        }
+                    case .failure(let error):
+                        self?.showError(error.errorDescription!)
+                    }
                 }
-            case .failure(let error):
-                print(error)
             }
-        }
         }
     }
     
-    func getCommits(completion: @escaping (Result<[Commit],MyError>)-> Void){
-        guard let detailItem = detailItem else {
-            return
-        }
-        let resourceUrl = "https://api.github.com/repos/\(detailItem.fullName)/commits"
-        let url = URL(string: resourceUrl)!
-        session.dataTask(with: url){ data, _, error in
-            if let error = error {
-                completion(.failure(MyError(message: error.localizedDescription)))
-            }
-            guard let data = data else {
-                completion(.failure(MyError(message: "No data available")))
-                return
-            }
-            do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let gitCommit = try decoder.decode([Commit].self, from: data)
-                let commitDetails = gitCommit
-                print(commitDetails)
-                completion(.success(commitDetails))
-            } catch{
-                completion(.failure(MyError(message: "Error while trying to fetch data")))
-            }
-            
-        }.resume()
+    private func showError(_ message: String) {
+        let title = "Network problem"
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        alert.preferredAction = okAction
+        present(alert, animated: true)
     }
     
     fileprivate func setUpOutlets() {
@@ -113,8 +104,8 @@ extension DetailViewController:UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Commit",for: indexPath) as? CommitTableCell else {return UITableViewCell()}
-        viewModel = DetailTableViewModel(committer: gitCommits)
-        let model = viewModel.viewModel(for: indexPath.row)
+        tableViewModel = DetailTableViewModel(committer: gitCommits)
+        let model = tableViewModel.viewModel(for: indexPath.row)
         cell.config(withViewModel: model)
         
         return cell

@@ -20,6 +20,7 @@ class ViewControllerTests: XCTestCase {
         session = MockURLSession()
         alertVerifier = AlertVerifier()
         sut.session = session//Inject mock
+        sut.viewModel.session = session
         sut.loadViewIfNeeded()
     }
     

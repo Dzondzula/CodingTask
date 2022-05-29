@@ -24,7 +24,7 @@ class ViewController: UITableViewController,UISearchBarDelegate {
     var handleResults: ([GitInfo]) -> Void = { print($0) }
     
     
-    var viewModel = VCViewModel(){
+    var viewModel = VCViewModel(user: "octocat"){
         didSet{
             guard isViewLoaded else {return}
             
@@ -37,12 +37,13 @@ class ViewController: UITableViewController,UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        Dispatch.background{ [weak self] in
-                self?.fetchData{ result in
+        
+        Dispatch.global(qos: .userInitiated).async {
+            self.viewModel.fetchData{ result in
             switch result{
                 
             case .success(let result):
-                Dispatch.main {
+                DispatchQueue.main.async {
                     [weak self] in
                     guard let self = self else {return}
                     
@@ -53,17 +54,21 @@ class ViewController: UITableViewController,UISearchBarDelegate {
                     
                 }
             case .failure(let error):
+                Dispatch.main.async{
                 let errorMessage = error.localizedDescription
-                self?.showError(errorMessage)
+                self.showError(errorMessage)
+            }
             }
         }
         }
         let sort = UIBarButtonItem(title: viewModel.sortedMost, style: .plain, target: self, action: #selector(sorting))
-        sort.accessibilityIdentifier = "Sort"
+        //sort.accessibilityIdentifier = "Sort"
         sort.isAccessibilityElement = true
         navigationItem.rightBarButtonItems = [sort]
         
     }
+    
+    
     //    override func viewDidAppear(_ animated: Bool) {
     //        super.viewDidAppear(animated)
     //        Task{
@@ -101,38 +106,8 @@ class ViewController: UITableViewController,UISearchBarDelegate {
     //        }
     
     
-    //USING dataTask and closure
-    
-    func fetchData(completionHandler: @escaping (Result<[GitInfo],Error>)->Void){
-        let urlString = viewModel.urlRepos
-        let url = URL(string: urlString)!
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        
-        session.dataTask(with: url){ data,response,error in
-            var decoded : [GitInfo] = []
-            
-            if let error = error{
-                completionHandler(.failure(error))
-            } else if let response = response as? HTTPURLResponse,response.statusCode != 200{
-                completionHandler(.failure(error!))
-            } else if let data = data {
-                do{
-                    decoded = try decoder.decode([GitInfo].self, from: data)
-                    completionHandler(.success(decoded))
-                } catch {
-                    
-                    completionHandler(.failure(error))
-                }
-            }
-            
-        }.resume()
-        
-    }
-    
-    
     private func showError(_ message: String) {
-        let title = "Network problem"
+        let title = viewModel.networkError
         let alert = UIAlertController(
             title: title,
             message: message,
@@ -182,7 +157,7 @@ extension ViewController {
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        let vc = self.storyboard?.instantiateViewController(identifier: String(describing: DetailViewController.self)) as! DetailViewController
         tableViewModel = RepositoryTabelViewModel(repository: git2)
         let repoDetail =  tableViewModel.viewModelDetail(for: indexPath.row)
         vc.detailItem = repoDetail
