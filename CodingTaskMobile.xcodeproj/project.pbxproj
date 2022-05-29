@@ -26,6 +26,7 @@
 		C179102F283BC8E8001DA5FD /* VCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C179102E283BC8E8001DA5FD /* VCViewModel.swift */; };
 		C17B547F2842B1CF007FC6A6 /* DetailTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B547E2842B1CF007FC6A6 /* DetailTableViewModel.swift */; };
 		C17B54812842B20A007FC6A6 /* VCTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B54802842B20A007FC6A6 /* VCTableViewModel.swift */; };
+		C17B54982843C58B007FC6A6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B54972843C58B007FC6A6 /* Extensions.swift */; };
 		C19146CD27E4E86800B366C1 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19146CC27E4E86800B366C1 /* ViewControllerTests.swift */; };
 		C19146D427E5084800B366C1 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19146D327E5084800B366C1 /* TestHelpers.swift */; };
 		C19146D627E51C5700B366C1 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19146D527E51C5700B366C1 /* MockURLSession.swift */; };
@@ -87,6 +88,7 @@
 		C179102E283BC8E8001DA5FD /* VCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCViewModel.swift; sourceTree = "<group>"; };
 		C17B547E2842B1CF007FC6A6 /* DetailTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewModel.swift; sourceTree = "<group>"; };
 		C17B54802842B20A007FC6A6 /* VCTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCTableViewModel.swift; sourceTree = "<group>"; };
+		C17B54972843C58B007FC6A6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C19146CA27E4E86800B366C1 /* ViewControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19146CC27E4E86800B366C1 /* ViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTests.swift; sourceTree = "<group>"; };
 		C19146D327E5084800B366C1 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		C12B483F27E209BE004EE0FD /* CodingTaskMobile */ = {
 			isa = PBXGroup;
 			children = (
+				C17B54992843C597007FC6A6 /* Extensions */,
 				C179102D283BC3BF001DA5FD /* ViewModel */,
 				C12B484027E209BE004EE0FD /* AppDelegate.swift */,
 				C12B484227E209BE004EE0FD /* SceneDelegate.swift */,
@@ -204,6 +207,14 @@
 				C17B54802842B20A007FC6A6 /* VCTableViewModel.swift */,
 			);
 			path = VCViewModel;
+			sourceTree = "<group>";
+		};
+		C17B54992843C597007FC6A6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C17B54972843C58B007FC6A6 /* Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C19146CB27E4E86800B366C1 /* ViewControllerTests */ = {
@@ -369,6 +380,7 @@
 				C1514AE827E35EA00090204F /* RectangleBoxView.swift in Sources */,
 				C12B484327E209BE004EE0FD /* SceneDelegate.swift in Sources */,
 				C17B547F2842B1CF007FC6A6 /* DetailTableViewModel.swift in Sources */,
+				C17B54982843C58B007FC6A6 /* Extensions.swift in Sources */,
 				C179102F283BC8E8001DA5FD /* VCViewModel.swift in Sources */,
 				C179102B283B990C001DA5FD /* CommitTableViewCell.swift in Sources */,
 				C17B54812842B20A007FC6A6 /* VCTableViewModel.swift in Sources */,

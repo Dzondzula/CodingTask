@@ -37,11 +37,12 @@ class ViewController: UITableViewController,UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        fetchData{ result in
+        Dispatch.background{ [weak self] in
+                self?.fetchData{ result in
             switch result{
                 
             case .success(let result):
-                DispatchQueue.main.async {
+                Dispatch.main {
                     [weak self] in
                     guard let self = self else {return}
                     
@@ -53,9 +54,9 @@ class ViewController: UITableViewController,UISearchBarDelegate {
                 }
             case .failure(let error):
                 let errorMessage = error.localizedDescription
-                self.showError(errorMessage)
+                self?.showError(errorMessage)
             }
-            
+        }
         }
         let sort = UIBarButtonItem(title: viewModel.sortedMost, style: .plain, target: self, action: #selector(sorting))
         sort.accessibilityIdentifier = "Sort"

@@ -40,19 +40,19 @@ class DetailViewController: UIViewController,WKNavigationDelegate {
         view.backgroundColor = .white
         
         setUpOutlets()
-        
-        getCommits(){ result in
+        Dispatch.background { [weak self] in
+            self?.getCommits(){ result in
             switch result{
                 
             case .success(let commits):
-                self.gitCommits = commits
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                self?.gitCommits = commits
+                Dispatch.main {
+                    self?.tableView.reloadData()
                 }
             case .failure(let error):
                 print(error)
             }
-            
+        }
         }
     }
     
@@ -134,3 +134,4 @@ extension DetailViewController{
         print(error.localizedDescription)
     }
 }
+
