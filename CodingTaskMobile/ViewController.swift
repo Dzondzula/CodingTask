@@ -12,7 +12,9 @@ protocol URLSessionProtocol{
     //    func data(from url: URL, delegate: URLSessionTaskDelegate?) async throws -> (Data, URLResponse)
 }
 
-class ViewController: UITableViewController,UISearchBarDelegate {
+class ViewController: UITableViewController,UISearchBarDelegate,Storyboarded {
+    
+    weak var coordinator :MainCoordinator?
     
     @IBOutlet var search: UITableView!
     var git : [GitInfo] = [] {
@@ -161,7 +163,8 @@ extension ViewController {
         tableViewModel = RepositoryTabelViewModel(repository: git2)
         let repoDetail =  tableViewModel.viewModelDetail(for: indexPath.row)
         vc.detailItem = repoDetail
-        navigationController?.pushViewController(vc, animated: true)
+        coordinator?.detailVC(to: repoDetail)
+        //navigationController?.pushViewController(vc, animated: true)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

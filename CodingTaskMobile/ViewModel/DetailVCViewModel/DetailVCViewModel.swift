@@ -33,7 +33,7 @@ struct DetailVCViewModel{
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let gitCommit = try decoder.decode([Commit].self, from: data)
                 let commitDetails = gitCommit
-                print(commitDetails)
+                //print(commitDetails)
                 completion(.success(commitDetails))
             } catch{
                 completion(.failure(MyError(message: "Error while trying to fetch data")))

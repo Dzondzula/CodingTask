@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RQG-7J-ND8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pgb-Qx-9sd">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Github Trends-->
+        <!--View Controller-->
         <scene sceneID="VRy-DO-2an">
             <objects>
                 <tableViewController storyboardIdentifier="ViewController" id="pgb-Qx-9sd" customClass="ViewController" customModule="CodingTaskMobile" customModuleProvider="target" sceneMemberID="viewController">
@@ -99,7 +99,6 @@
                             <outlet property="delegate" destination="pgb-Qx-9sd" id="YEW-ho-1Ta"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Github Trends" id="oR4-vh-aiU"/>
                     <connections>
                         <outlet property="search" destination="5qZ-9O-RV1" id="qax-42-bhD"/>
                     </connections>
@@ -228,24 +227,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SvF-Z6-5uR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1452.3364485981308" y="53.131749460043203"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="WXx-wp-DKe">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RQG-7J-ND8" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jRN-bO-fty">
-                        <rect key="frame" x="0.0" y="44" width="428" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="pgb-Qx-9sd" kind="relationship" relationship="rootViewController" id="9sg-Nm-jZ4"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5M6-tc-13H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-48" y="54"/>
         </scene>
     </scenes>
     <resources>

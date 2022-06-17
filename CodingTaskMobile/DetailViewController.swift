@@ -8,7 +8,8 @@ import WebKit
 import UIKit
 
 
-class DetailViewController: UIViewController,WKNavigationDelegate {
+class DetailViewController: UIViewController,WKNavigationDelegate,Storyboarded {
+    weak var coordinator: MainCoordinator?
     var detailItem: GitInfo?
     
     @IBOutlet weak var tableView: UITableView!
@@ -61,6 +62,12 @@ class DetailViewController: UIViewController,WKNavigationDelegate {
             }
         }
     }
+    
+    //we need a way for DetailViewController to report back when its work has finished.we’re going to use this view controller being dismissed as our signal that the detailVC process has finished.
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        coordinator?.workFinished()//if your main coordinator needs to respond specifically to buying finishing – perhaps to synchronize user data, or cause some UI to refresh 
+    //}
     
     private func showError(_ message: String) {
         let title = "Network problem"
